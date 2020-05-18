@@ -21,24 +21,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('seConnecter', function () {
-    return view('welcome')->middleware('auth');
-});
+});*/
 
 Route::get('home', 'HomeController@index')->name('home');
+Route::get('post/create', function () {
+    return view('createPost');
+})->name('postCreate')->middleware('auth');
 
+Route::post('post/valid', 'postController@store')->middleware('auth');
 
-/*Route::get('prospects', function () {
-    return view('prospect');
-})->name('prospect')->middleware('auth');
+Route::get('post/list', 'postController@index')->name('postList')->middleware('auth');
 
-Route::get('parrainages', function () {
-    return view('parrainage');
-})->name('parrainage')->middleware('auth');
-
-Route::get('exportProspect', 'prospectExportController@export')->name('exportProspect');
-Route::get('exportParrainage', 'parrainageExportController@export')->name('exportProspect');*/
+Route::get('/', 'postController@accueil')->name('accueil');
