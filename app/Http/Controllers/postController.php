@@ -38,21 +38,39 @@ class PostController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id = "")
     {
 
-        $post = new Post;
+        if($id > 0 ){
+            $post = Post::where('id',$id)->first();
+        }
+
+        else {
+            $post = new Post;
+        }
+
         $post->titre = $request->titre;
         $post->contenu = $request->contenu;
+        $post->save();
 
         $path = public_path();
 
         if ($request->hasFile('image')) {
-            $request->file('image')->move($path .'/images');
+            $request->file('image')->move($path .'/images/', $post->id . '.jpg');
         }
 
-        $post->save();
+        return redirect()->route('postList');
+    }
 
+    public function edit(Request $request,$id)
+    {
+        $post = Post::where('id', $id)->first();
+        return view('editPost')->with('post', $post);
+    }
+
+    public function delete($id)
+    {
+        Post::where('id',$id)->delete();
         return redirect()->route('postList');
     }
 

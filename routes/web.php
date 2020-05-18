@@ -31,7 +31,10 @@ Route::get('post/create', function () {
 })->name('postCreate')->middleware('auth');
 
 Route::post('post/valid', 'postController@store')->middleware('auth');
+Route::post('post/valid/{id}', 'postController@store')->middleware('auth');
 
 Route::get('post/list', 'postController@index')->name('postList')->middleware('auth');
+Route::get('post/edit/{id}', 'postController@edit')->name('postEdit')->middleware('auth');
+Route::get('post/delete/{id}', 'postController@delete')->name('postDelete')->middleware('auth');
 
 Route::get('/', 'postController@accueil')->name('accueil');

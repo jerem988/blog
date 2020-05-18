@@ -7,16 +7,16 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Créér un nouveau Poste</div>
-                    {{ Form::open(array('url' => 'post/valid', 'files' => true)) }}
+                    {{ Form::open(array('url' => 'post/valid/'. $post->id, 'files' => true)) }}
 
                     <div class="col-md-12">
                         {!!Form::label('titreLabel', 'Titre'); !!}
-                        {!! Form::text('titre', '', ['class' => 'form-control']); !!}
+                        {!! Form::text('titre', $post->titre, ['class' => 'form-control']); !!}
                     </div>
 
                     <div class="col-md-12">
                         {!! Form::label('contenuLabel', 'Contenu'); !!}
-                        {!! Form::textarea('contenu', '', ['class' => 'form-control']); !!}
+                        {!! Form::textarea('contenu', $post->contenu, ['class' => 'form-control']); !!}
                     </div>
                     <br/>
 

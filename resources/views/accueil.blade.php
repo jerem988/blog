@@ -2,13 +2,13 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 @foreach ($posts as $post)
                     <div class="card">
-                        <img class="card-img-top" src="..." alt="Images">
+                        <img class="card-img-top" style="height:500px" src="{{asset('images/' . $post->id . '.jpg')}}" alt="Images">
                         <div class="card-body">
                             <h5 class="card-title">{{$post->titre}}</h5>
-                            <p class="card-text">{{$post->contenu}}</p>
+                            <p id="contenuText" class="card-text">{!! nl2br(e($post->contenu)) !!}</p>
                             <a href="#" class="btn btn-primary">Lire Plus</a>
                         </div>
                     </div>
